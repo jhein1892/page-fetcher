@@ -8,7 +8,7 @@ const request = require('request');
 const yourResponse = process.argv.slice(2); //isoltes the right input
 const yourURL = yourResponse[0]; //isolates the URL we go to
 const yourFile = yourResponse[1]; // isolates where we put it. 
-// console.log(yourFile)
+
 
 const fetcher = function () {
   request(`${yourURL}`, (error, response, body) => {
@@ -18,7 +18,7 @@ const fetcher = function () {
           rl.pause()
           return;   
       }
-      
+      else if (!error) {
       fs.exists(`${yourFile}`, function (exists) {
           if (exists) {
             rl.question("This file already exists. Would you like to overwrite? (Y/N)", (answer) => {
@@ -40,8 +40,8 @@ const fetcher = function () {
           else {
             writeToFile(body);
           }
-        }
-      )
+        })      
+        }  
     })
   };
 
@@ -54,8 +54,8 @@ const writeToFile = function (content) {
   })
 }
 
-fetcher();
 
+fetcher()
 
 
 
