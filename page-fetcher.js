@@ -42,13 +42,14 @@ const fetcher = function () {
           }
         })      
         }  
+        
     })
   };
 
 const writeToFile = function (content) {
   fs.writeFile(`${yourFile}`, content, function (error, data) {
     if (error) {console.log('error')}
-    else {console.log(`It's saved!`);}
+    else {console.log(`Downloaded and saved ${content.length} bytes to ${yourFile}`)}
     rl.pause();
     return;
   })
